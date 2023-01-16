@@ -1,0 +1,39 @@
+{
+  "table": [
+    {
+      "name": "Pavel",
+      "age": 34,
+      "email": "ghgasjhdgksa@gmail.com",
+      "tel": "+9728768768",
+      "fruits": ["apple", "pear", "lemon"]
+    },
+    {
+      "name": "Olga",
+      "age": 14,
+      "email": "uoajsdfoisajf@gmail.com",
+      "tel": "+9728787768",
+      "fruits": ["orange", "pear", "watermelon"]
+    },
+    {
+      "name": "Ivan",
+      "age": 26,
+      "email": "vany202320f@gmail.com",
+      "tel": "+97458786988",
+      "fruits": ["strawberry", "wildberry", "banan"]
+    },
+    {
+      "name": "Xeniya",
+      "age": 31,
+      "email": "xeny76876@gmail.com",
+      "tel": "+9787443586988",
+      "fruits": ["pineapple", "coconut"]
+    },
+    {
+      "name": "Danil",
+      "age": 45,
+      "email": "danya66@gmail.com",
+      "tel": "+97887586988",
+      "fruits": ["mandarin", "raspberry", "apricot"]
+    }
+  ]
+}
