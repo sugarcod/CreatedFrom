@@ -1,23 +1,47 @@
 import { useState } from "react";
 import data from "../utils/data.json";
 import styles from "../styles/Table.module.sass";
+import TDRow from "../components/TDRow/TDRow";
 
 const TestTable = () => {
-  let table = data.table;
+  const table = data.table;
   const [info, setInfo] = useState(table);
-  console.log(table, "info");
-  console.log(Object.keys(info[0]), "1");
+  const [rev, setRev] = useState<boolean>(false);
 
-  const sortim = (field: string | number) => {
-    let temp = info.sort((a, b) => {
-      if (typeof field == "sting") {
-        return a.field[0] > b.field[0];
+  const updateData = (obj, index) => {
+    let oldArr = [...info];
+    oldArr.splice(index, 1, obj);
+    setInfo(oldArr);
+  };
+
+  const sortim = (field: string) => {
+    let infoOld = [...info];
+    let temp;
+    if (field == "age") {
+      if (rev) {
+        temp = infoOld.sort((a, b): number => {
+          return a[field] > b[field] ? 1 : -1;
+        });
+      } else {
+        temp = infoOld.sort((a, b): number => {
+          return a[field] > b[field] ? -1 : 1;
+        });
       }
-      if (typeof field == "number") {
-        return a.field > b.field;
+    } else {
+      if (rev) {
+        temp = infoOld.sort((a, b): number => {
+          return a[field][0] > b[field][0] ? 1 : -1;
+        });
+      } else {
+        temp = infoOld.sort((a, b): number => {
+          return a[field][0] > b[field][0] ? -1 : 1;
+        });
       }
-    });
-    setInfo(temp);
+    }
+    if (temp && temp.length !== 0) {
+      setInfo(temp);
+      setRev(!rev);
+    }
   };
 
   return (
@@ -26,7 +50,7 @@ const TestTable = () => {
         <thead>
           <tr>
             {Object.keys(info[0]).map((el) => (
-              <th onClick={sortim(el)} key={el}>
+              <th className="userselect" onClick={(e) => sortim(el)} key={el}>
                 {el}
               </th>
             ))}
@@ -34,17 +58,8 @@ const TestTable = () => {
         </thead>
 
         <tbody>
-          {info.map((el) => {
-            const { name, age, email, tel, fruits } = el;
-            return (
-              <tr key={age}>
-                <td>{name}</td>
-                <td>{age}</td>
-                <td>{email}</td>
-                <td>{tel}</td>
-                <td>{fruits}</td>
-              </tr>
-            );
+          {info.map((el, i) => {
+            return <TDRow ind={i} renew={updateData} key={el.email} {...el} />;
           })}
         </tbody>
       </table>
